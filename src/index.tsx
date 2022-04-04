@@ -10,7 +10,7 @@ const root = createRoot(container)
 
 root.render(
   <React.StrictMode>
-    <div className="dark:bg-slate-900">
+    <div className="">
       <div className="prose dark:prose-invert container mx-auto p-10">
         <h1>Festungen in Minecraft</h1>
         <p>
