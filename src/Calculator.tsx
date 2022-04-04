@@ -38,8 +38,8 @@ function Calculator() {
       {/* Info-text */}
       <p>
         Gebe die <b>X- und Z-Koordinate</b> und die <b>Richtung</b> des
-        Enderauges ein. Um alle Informationen zu erhalten, kannst du mit{' '}
-        <code>f3</code> die Debug-Bildschrim in Minecraft anzeigen lassen.
+        Enderauges ein. Um alle Informationen zu erhalten, kannst du in
+        Minecraft mit <code>f3</code> den Debug-Bildschirm anzeigen lassen.
       </p>
       {/* Berechnung */}
       {measurements.map((measurement, index) => (
