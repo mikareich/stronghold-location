@@ -23,7 +23,7 @@ root.render(
         <h2>Was musst du machen?</h2>
         <p>
           Alles was du dafür brauchst, sind mindestens <b>zwei Enderaugen</b>.
-          Diese wirfst du aus zwei <b>unterschiedlichen Positionen</b>, damit du
+          Diese wirfst du aus zwei <b>unterschiedlichen Positionen</b>, um
           anschließend sowohl die Positionen, als auch <b>die Richtungen</b> der
           Enderaugen hier einzutragen. Anschließend berechen wir mit den
           angegebenen Daten die Position der Festung, in die die Enderaugen uns
@@ -31,6 +31,10 @@ root.render(
         </p>
         <br />
         <Calculator />
+        <h2>Wie funktioniert das?</h2>
+        <p>Mathe.</p>
+        <hr />
+        <a href="https://github.com/mikareich">Mika Reich</a>
       </div>
     </div>
   </React.StrictMode>
