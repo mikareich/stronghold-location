@@ -9,8 +9,30 @@ function Calculator() {
     { x: NaN, z: NaN, direction: NaN },
     { x: NaN, z: NaN, direction: NaN },
   ])
-
   const [result, setResult] = React.useState<Coordinate | null>(null)
+
+  const copyResult = () =>
+    navigator.clipboard.writeText(`${result!.x} ~ ${result!.z}`)
+
+  const updateMeasurement = (
+    index: number,
+    key: keyof Meseasurement,
+    value: string
+  ) => {
+    const newMeasurements = [...measurements]
+    newMeasurements[index][key] = parseFloat(value)
+    setMeasurements(newMeasurements)
+  }
+
+  const addMeasurement = () =>
+    setMeasurements([
+      ...measurements,
+      {
+        x: NaN,
+        z: NaN,
+        direction: NaN,
+      },
+    ])
 
   useEffect(() => {
     try {
@@ -18,20 +40,9 @@ function Calculator() {
       if (!Number.isNaN(x) && !Number.isNaN(z)) setResult({ x, z })
       else setResult(null)
     } catch (error) {
-      console.error(error)
       setResult(null)
     }
   }, [measurements])
-
-  const updateMeasurement = (
-    index: number,
-    key: keyof Meseasurement,
-    value: number
-  ) => {
-    const newMeasurements = [...measurements]
-    newMeasurements[index][key] = value
-    setMeasurements(newMeasurements)
-  }
 
   return (
     <form className="border p-5 pt-2">
@@ -49,48 +60,55 @@ function Calculator() {
               type="number"
               className={inputClassName}
               placeholder="x"
-              value={measurement.x || ''}
-              onChange={(e) =>
-                updateMeasurement(index, 'x', parseFloat(e.target.value))
-              }
+              value={!Number.isNaN(measurement.x) ? measurement.x : ''}
+              onChange={(e) => updateMeasurement(index, 'x', e.target.value)}
             />
             <input
               type="number"
               className={inputClassName}
               placeholder="z"
-              value={measurement.z || ''}
-              onChange={(e) =>
-                updateMeasurement(index, 'z', parseFloat(e.target.value))
-              }
+              value={!Number.isNaN(measurement.z) ? measurement.z : ''}
+              onChange={(e) => updateMeasurement(index, 'z', e.target.value)}
             />
             <input
               type="number"
               className={inputClassName}
               placeholder="Richtung"
-              value={measurement.direction || ''}
+              value={
+                !Number.isNaN(measurement.direction)
+                  ? measurement.direction
+                  : ''
+              }
               onChange={(e) =>
-                updateMeasurement(
-                  index,
-                  'direction',
-                  parseFloat(e.target.value)
-                )
+                updateMeasurement(index, 'direction', e.target.value)
               }
             />
           </div>
         </div>
       ))}
       {/* Ergebnisse */}
-      {result ? (
-        <p>
-          Die Festung befindet sich bei <b>X: {result.x} </b> und{' '}
-          <b>Z: {result.z}</b>
-        </p>
-      ) : (
-        <p>
-          Vervollständige deine Messungen, damit die Position der Festung
-          berechnet werden kann.
-        </p>
+      {result && (
+        <div>
+          <p>
+            Die Festung befindet sich bei <b>X: {result.x} </b> und{' '}
+            <b>Z: {result.z}</b>
+          </p>
+          <button
+            type="button"
+            className="text-black underline"
+            onClick={copyResult}
+          >
+            📋 Kopiere Position
+          </button>
+        </div>
       )}
+      <button
+        type="button"
+        className="text-black underline"
+        onClick={addMeasurement}
+      >
+        Neue Messung hinzufügen
+      </button>
     </form>
   )
 }

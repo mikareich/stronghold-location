@@ -48,11 +48,25 @@ function calculatePosition(measurements: Meseasurement[]): Coordinate {
     )
   }
 
-  const [m1, m2] = measurements
-  const x = Math.round(schnittstelle(m1, m2))
-  const z = Math.round(funktionsschar(m1, x))
+  // vergleiche alle messungen und ermittle durchschnitt
+  let x_avg = 0
+  let z_avg = 0
+  for (let m1Index = 0; m1Index < measurements.length; m1Index += 1) {
+    const measurement1 = measurements[m1Index]
+    for (
+      let m2Index = m1Index + 1;
+      m2Index < measurements.length;
+      m2Index += 1
+    ) {
+      const measurement2 = measurements[m2Index]
+      const x = schnittstelle(measurement1, measurement2)
+      const z = funktionsschar(measurement1, x)
+      x_avg += (2 * x) / (measurements.length * (measurements.length - 1))
+      z_avg += (2 * z) / (measurements.length * (measurements.length - 1))
+    }
+  }
 
-  return { x, z }
+  return { x: Math.round(x_avg), z: Math.round(z_avg) }
 }
 
 export default calculatePosition
