@@ -1,9 +1,9 @@
-import './index.css';
+import './index.css'
 
-import React from 'react';
-import { createRoot } from 'react-dom/client';
+import React from 'react'
+import { createRoot } from 'react-dom/client'
 
-import Calculator from './Calculator';
+import Calculator from './Calculator'
 
 const container = document.getElementById('root')!
 const root = createRoot(container)

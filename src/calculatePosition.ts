@@ -25,10 +25,10 @@ function calculatePosition(measurements: Meseasurement[]): Coordinate {
     measurement.z
 
   /**
-   * Berechnet Schnittstelle der Messungsgeraden
+   * Berechnet einfache Schnittstelle zweier Messungsgeraden.
    * @param measurement1 Messung 1
    * @param measurement2 Messung 2
-   * @returns Schnittstelle der Messungsgeraden
+   * @returns Schnittstelle zweier Messungsgeraden
    */
   const schnittstelle = (
     measurement1: Meseasurement,
